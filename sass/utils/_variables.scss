@@ -1,0 +1,25 @@
+/// Z-indexes map, gathering all Z layers of the application
+/// @access public
+/// @type Map
+/// @prop {String} key - Layer's name
+/// @prop {Number} value - Z value mapped to the key
+$z-indexes: (
+  'modal': 5000,
+  'dropdown': 4000,
+  'default': 1,
+  'below': -1,
+);
+
+/// Breakpoints map, gathering all size type of the screen
+/// for media query purpose
+/// @access public
+/// @type Map
+/// @prop {String} key - size type
+/// @prop {Number} value - screen size value mapped to the key
+$breakpoints: (
+  'tiny':   ( max-width:  767px ),
+  'small':  ( min-width:  768px ),
+  'medium': ( min-width:  992px ),
+  'large':  ( min-width: 1200px ),
+  'custom': ( min-height:  40em )
+);

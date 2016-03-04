@@ -1,0 +1,170 @@
+/// Mixin to display logger based on level
+/// @param {String} $minimum-level
+@mixin logger($minimum-level) {
+  // List of available levels
+  $levels: "DEBUG", "INFO", "WARN", "ERROR", "FATAL";
+ 
+  // Make sure the given string is uppercase
+  $minimum-level: to-upper-case($minimum-level);
+ 
+  // If level is `ALL`, go with lowest level of all
+  @if $minimum-level == "ALL" {
+    $minimum-level: nth($levels, 1);
+  }
+ 
+  // If level is invalid, arbitrary go with `INFO`
+  @if not index($levels "OFF", $minimum-level) {
+    $minimum-level: "INFO";
+  }
+ 
+  // Create global variable
+  $logger-configuration: (
+    // List of available levels
+    "levels"  : $levels,
+ 
+    // List of levels that are printed with `@error`
+    "errors"  : "FATAL" "ERROR",
+ 
+    // Minimum level (as an index of `$levels`) to print
+    "min"     : index($levels, $minimum-level),
+ 
+    // Whether or not the logger is enabled
+    "enabled" : $minimum-level != "OFF",
+ 
+    // A map to keep track of all logs
+    "history" : (
+      "DEBUG" : (),
+      "INFO"  : (),
+      "WARN"  : (),
+      "ERROR" : (),
+      "FATAL" : ()
+    )
+  ) !global;
+}
+
+/// Get a value from logger-configuration map
+/// @access public
+/// @param {String} $key
+/// @return {String}?
+/// @require $logger-configuration
+@function logger-conf($key) {
+  @return map-get($logger-configuration, $key);
+}
+
+/// Mixin to set logger message
+/// @param {String} $level - logger level
+/// @param {String} $message - message to display
+@mixin log($level, $message) {
+  // Make sure the level is uppercase
+  $level: to-upper-case($level);
+ 
+  // Unless it's disabled, proceed
+  @if logger-conf("enabled") {
+    // Get current level's index
+    // For instance, `DEBUG` would be `1`
+    $index-current-level: index(logger-conf("levels"), $level);
+ 
+    // If `$level` is invalid, 
+    // arbitrary falls back on `INFO`
+    @if not $index-current-level { 
+      $level: "INFO";
+    }
+ 
+    // Update logger history
+    @include logger-update-history($level, $message);
+ 
+    // Finally, print message in console 
+    // if current level is greater than or equal to minimum level.
+    @if $index-current-level >= logger-conf("min") {
+      $print: '[' + $level + '] :: ' + $message;
+ 
+      // Print it as `@error` if it's an error level
+      @if index(logger-conf("errors"), $level) {
+        @error $print;
+      }
+ 
+      // Else use `@warn`
+      @else {
+        @warn $print;
+      }
+    }
+  }
+}
+
+/// Mixin to update logger history
+/// @param {String} $level - logger level
+/// @param {String} $message - message to display
+@mixin logger-update-history($level, $message) {
+  // Get history map from configuration
+  $history: logger-conf("history");
+ 
+  // Get history list for current level
+  $current-level-history: map-get($history, $level);
+ 
+  // Append the fresh log to the list
+  $current-level-history: append($current-level-history, $message);
+ 
+  // Create a temporary variable containing the new history map
+  $logger-history: map-merge($history, ($level: $current-level-history));
+ 
+  // Update the history map from the configuration with our temporary variable
+  $logger-configuration: map-merge($logger-configuration, ("history": $logger-history)) !global;
+}
+
+/// simplify from log mixing for FATAL
+/// @extends log
+/// @params {String} $message - message to display
+@mixin FATAL($message) { @include log("FATAL", $message); }
+
+/// simplify from log mixing for ERROR
+/// @extends log
+/// @params {String} $message - message to display
+@mixin ERROR($message) { @include log("ERROR", $message); }
+
+/// simplify from log mixing for WARN
+/// @extends log
+/// @params {String} $message - message to display
+@mixin WARN($message) { @include log("WARN",  $message); }
+
+/// simplify from log mixing for INFO
+/// @extends log
+/// @params {String} $message - message to display
+@mixin INFO($message) { @include log("INFO",  $message); }
+
+/// simplify from log mixing for DEBUG
+/// @extends log
+/// @params {String} $message - message to display
+@mixin DEBUG($message) { @include log("DEBUG", $message); }
+
+/// Mixin to open new 'loger-help' selector
+@mixin logger-help {
+  // Open a new `logger-help` selector
+  logger-help {
+    OFF: "Disable the logger.";
+    FATAL: "Severe errors that cause premature termination.";
+    ERROR: "Other runtime errors or unexpected conditions.";
+    WARN: "Use of deprecated APIs, poor use of API, 'almost' errors,"
+    + "other runtime situations that are undesirable or unexpected, but not necessarily wrong.";
+    INFO: "Interesting runtime events (startup/shutdown).";
+    DEBUG: "Detailed information on the flow through the system.";
+  }
+}
+
+/// Mixin to open new 'loger-logs' selector
+@mixin logger-print-logs {
+  // Open a new `logger-logs` selector
+  logger-logs {
+    // Loop over the history
+    @each $level, $logs in logger-conf("history") {
+      // Check whether current logging level from loop
+      // should be displayed or not based on the minimum level
+      // and the length of its value (no log, no print).
+      @if index(logger-conf("levels"), $level) >= logger-conf("min") and length($logs) > 0 {
+        // Loop over the registered logs and print them.
+        @each $log in $logs {
+          #{$level}: $log;
+        }
+      }
+    }
+  }
+}
