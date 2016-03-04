@@ -1,2 +1,5 @@
+# Numerous always-ignore extensions
+*.scssc
+
 # Folders to ignore
 .sass-chache
