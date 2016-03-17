@@ -1,14 +1,11 @@
 @charset 'utf-8';
 /*!
- * Madrick v0.0.1 (http://website.com)
- * Copyright 2016 Madrick.
+ * Sani v0.0.1 (http://website.com)
+ * Copyright 2016 Fath Technologies.
  * Licensed under MIT (License link)
  *
- * @author Achmad Ricky Budianto
- * @mail achmadricky96@gmail.com
- *
  * Import this file using the following HTML or equivalent:
- * <link href="/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> 
+ * <link href="/css/sani.css" media="screen, projection" rel="stylesheet" type="text/css" /> 
  */
 
 @import "compass/reset";
@@ -19,3 +16,7 @@
   'utils/functions',
   'utils/mixins',
   'utils/logger';
+
+// components
+@import
+  'components/button';

@@ -73,6 +73,14 @@
 @mixin transform($value) {
       @include prefix((transform: $value), webkit moz ms o);
 }
+
+/// Mixin to add vendor prefix for property transition
+/// @author Achmad Ricky Budianto
+/// @extends prefix
+/// @param {e.g. all 0.3s ease} $value
+@mixin transition($value) {
+      @include prefix((transition: $value), webkit moz ms o);
+}
 // INFO: add code above this comment if you want to add any extends from prefix
 
 /// Mixin breakpoint for responsive purpose
@@ -87,4 +95,31 @@
   @else {
     @warn "Couldn't find a breakpoint named `#{$name}`.";
   }
+}
+
+/// Mixin handle background color to darken when hover and active
+/// @author Achmad Ricky Budianto
+/// @extends transition
+/// @param {Color} $bg-color
+@mixin button-bg-darken($bg-color) {
+  background: $bg-color;
+  &:hover {
+    background:darken($bg-color,10%);
+    @include transition(all 0.3s ease);
+  }
+  &:active {
+    background:darken($bg-color,20%);
+  }
+}
+
+/// Mixin to create variant of button (e.g. default, primary, success, etc)
+/// @author Achmad Ricky Budianto
+/// @extends button-bg-darken
+/// @param {Color} $bg-color - background color
+/// @param {Color} $color - font color
+/// @param {Color} $border-color - border color
+@mixin button-variant($bg-color, $color, $border-color) {
+  color: $color;
+  border-color: $border-color;
+  @include button-bg-darken($bg-color);
 }

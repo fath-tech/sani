@@ -6,3 +6,12 @@
 @function z($layer) {
   @return map-get($z-indexes, $layer);
 }
+
+/// Get a color value from a key of color
+/// @access public
+/// @param {String} $key - key of color
+/// @return {Color rgba()}
+/// @require $colors
+@function get-color($key) {
+  @return map-get($colors, $key);
+}

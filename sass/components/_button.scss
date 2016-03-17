@@ -1,0 +1,57 @@
+.btn {
+  color: $color-white;
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.btn-flat {
+  color: $color-white;
+  text-decoration: none;
+  padding: 5px 10px;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+// -------------------------------------------------------------------------------
+// Button Variant
+//
+.btn-default {
+  @include button-variant(get-color('btn-default-color'), rgba(85, 85, 85, 1.0), rgba(153, 153, 153, 1.0));
+}
+.btn-primary {
+  @include button-variant(get-color('btn-primary-color'), $color-white, transparent);
+}
+.btn-success {
+  @include button-variant(get-color('btn-success-color'), $color-white, transparent);
+}
+.btn-info {
+  @include button-variant(get-color('btn-info-color'), $color-white, transparent);
+}
+.btn-warning {
+  @include button-variant(get-color('btn-warning-color'), $color-white, transparent);
+}
+.btn-danger {
+  @include button-variant(get-color('btn-danger-color'), $color-white, transparent);
+}
+
+.btn-link {
+  background-color: $color-white;
+  color: get-color('link-color');
+
+  &:hover {
+    text-decoration: underline;
+    color: #2980b9;
+  } 
+}
+
+// Specificity overrides
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+  &.btn-block {
+    width: 100%;
+  }
+}

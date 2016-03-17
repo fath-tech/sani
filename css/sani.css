@@ -1,13 +1,10 @@
 /*!
- * Madrick v0.0.1 (http://website.com)
- * Copyright 2016 Madrick.
+ * Sani v0.0.1 (http://website.com)
+ * Copyright 2016 Fath Technologies.
  * Licensed under MIT (License link)
  *
- * @author Achmad Ricky Budianto
- * @mail achmadricky96@gmail.com
- *
  * Import this file using the following HTML or equivalent:
- * <link href="/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> 
+ * <link href="/css/sani.css" media="screen, projection" rel="stylesheet" type="text/css" /> 
  */
 /* line 5, C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
@@ -72,4 +69,161 @@ a img {
 /* line 116, C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
   display: block;
+}
+
+/* line 1, ../sass/components/_button.scss */
+.btn {
+  color: white;
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+/* line 10, ../sass/components/_button.scss */
+.btn-flat {
+  color: white;
+  text-decoration: none;
+  padding: 5px 10px;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+/* line 21, ../sass/components/_button.scss */
+.btn-default {
+  color: #555555;
+  border-color: #999999;
+  background: white;
+}
+/* line 106, ../sass/utils/_mixins.scss */
+.btn-default:hover {
+  background: #e6e6e6;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+/* line 110, ../sass/utils/_mixins.scss */
+.btn-default:active {
+  background: #cccccc;
+}
+
+/* line 24, ../sass/components/_button.scss */
+.btn-primary {
+  color: white;
+  border-color: transparent;
+  background: #2980b9;
+}
+/* line 106, ../sass/utils/_mixins.scss */
+.btn-primary:hover {
+  background: #20638f;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+/* line 110, ../sass/utils/_mixins.scss */
+.btn-primary:active {
+  background: #164666;
+}
+
+/* line 27, ../sass/components/_button.scss */
+.btn-success {
+  color: white;
+  border-color: transparent;
+  background: #2ecc71;
+}
+/* line 106, ../sass/utils/_mixins.scss */
+.btn-success:hover {
+  background: #25a25a;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+/* line 110, ../sass/utils/_mixins.scss */
+.btn-success:active {
+  background: #1b7943;
+}
+
+/* line 30, ../sass/components/_button.scss */
+.btn-info {
+  color: white;
+  border-color: transparent;
+  background: #59abe3;
+}
+/* line 106, ../sass/utils/_mixins.scss */
+.btn-info:hover {
+  background: #2d95dc;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+/* line 110, ../sass/utils/_mixins.scss */
+.btn-info:active {
+  background: #1f79b7;
+}
+
+/* line 33, ../sass/components/_button.scss */
+.btn-warning {
+  color: white;
+  border-color: transparent;
+  background: #f38420;
+}
+/* line 106, ../sass/utils/_mixins.scss */
+.btn-warning:hover {
+  background: #d56b0b;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+/* line 110, ../sass/utils/_mixins.scss */
+.btn-warning:active {
+  background: #a45209;
+}
+
+/* line 36, ../sass/components/_button.scss */
+.btn-danger {
+  color: white;
+  border-color: transparent;
+  background: #e74c3c;
+}
+/* line 106, ../sass/utils/_mixins.scss */
+.btn-danger:hover {
+  background: #d62c1a;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+/* line 110, ../sass/utils/_mixins.scss */
+.btn-danger:active {
+  background: #a82315;
+}
+
+/* line 40, ../sass/components/_button.scss */
+.btn-link {
+  background-color: white;
+  color: #2196f3;
+}
+/* line 44, ../sass/components/_button.scss */
+.btn-link:hover {
+  text-decoration: underline;
+  color: #2980b9;
+}
+
+/* line 54, ../sass/components/_button.scss */
+input[type="submit"].btn-block,
+input[type="reset"].btn-block,
+input[type="button"].btn-block {
+  width: 100%;
 }
